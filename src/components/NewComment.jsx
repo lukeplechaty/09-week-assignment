@@ -15,15 +15,15 @@ import { auth } from "@clerk/nextjs/server";
 
 export default async function Newcomment(props) {
   const { userId } = await auth();
-  const query1 = await db.query(`SELECT id FROM week09users WHERE uuid=$1`, [
+  const userquery = await db.query(`SELECT id FROM week09users WHERE uuid=$1`, [
     userId,
   ]);
-  const id = query1.rows[0].id;
-  const query2 = await db.query(
+  const id = userquery.rows[0].id;
+  const msgquery = await db.query(
     `SELECT week09comments.id, week09comments.msg, week09users.username FROM week09comments JOIN week09users ON week09comments.user_id = week09users.id WHERE week09comments.post_id=$1 ORDER BY week09comments.id DESC`,
     [props.postid]
   );
-  const msgs = query2.rows;
+  const msgs = msgquery.rows;
   async function handel(values) {
     "use server";
     const msg = values.get(`msg`);
@@ -57,10 +57,10 @@ export default async function Newcomment(props) {
             <DialogFooter>
               <Textarea name="msg" />
               <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
+                <Button type="submit">Save changes</Button>
               </DialogClose>
               <DialogClose asChild>
-                <Button type="submit">Save changes</Button>
+                <Button variant="outline">Cancel</Button>
               </DialogClose>
             </DialogFooter>
           </form>

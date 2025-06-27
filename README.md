@@ -3,6 +3,7 @@
 ## Reflection
 
 <img src="image-1.png" alt="phone & desktop"/>
+<img src="image-2.png" alt="DB"/>
 
 - basic requirements
 
@@ -13,7 +14,7 @@
   - Enable users to create posts associated with their Clerk userId. Posts should be displayed on the user’s profile page --done
 
 - stretch goals
-  - Allow users to update their content.
+  - Allow users to update their content --done
   - Allow users to delete their content --done
   - Allow users to view other profiles directly from posts they see on the global timeline, using a dynamic users route --done
   - Let users follow each other by establishing a follower and followee relationship between profiles.

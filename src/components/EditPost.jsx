@@ -12,17 +12,17 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from "./ui/textarea";
 
-export default async function EditBio(props) {
-  const query = await db.query(`SELECT bio FROM week09users WHERE id=$1`, [
-    props.userid,
+export default async function EditPost(props) {
+  const query = await db.query(`SELECT msg FROM week09posts WHERE id=$1`, [
+    props.postid,
   ]);
-  const bio = query.rows[0].bio;
+  const msg = query.rows[0].msg;
   async function handel(values) {
     "use server";
-    const bio = values.get(`bio`);
-    await db.query(`UPDATE week09users SET bio=$1 WHERE id=$2)`, [
-      bio,
-      props.userid,
+    const msg = values.get(`msg`);
+    await db.query(`UPDATE week09posts SET msg=$1 WHERE id=$2`, [
+      msg,
+      props.postid,
     ]);
     revalidatePath(`/users/${props.userid}`);
     revalidatePath(`/users/profile`);
@@ -31,14 +31,14 @@ export default async function EditBio(props) {
     <Dialog>
       <form>
         <DialogTrigger asChild>
-          <Button variant="outline">Edit Bio</Button>
+          <Button variant="outline">Edit Message</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <form action={handel}>
             <DialogHeader>
-              <DialogTitle>New post</DialogTitle>
+              <DialogTitle>Edit Message</DialogTitle>
             </DialogHeader>
-            <Textarea name="bio" defaultValue={bio} />
+            <Textarea name="msg" defaultValue={msg} />
             <DialogFooter>
               <DialogClose asChild>
                 <Button variant="outline">Cancel</Button>
