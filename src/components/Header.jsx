@@ -23,7 +23,7 @@ export default function Header() {
           <UserButton />
         </SignedIn>
         <SignedOut>
-          <SignInButton className="cursor-pointer justify-end" />
+          <SignInButton mode="modal" className="cursor-pointer justify-end" />
         </SignedOut>
       </div>
     </header>

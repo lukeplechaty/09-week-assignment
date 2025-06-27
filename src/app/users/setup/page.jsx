@@ -2,12 +2,16 @@ import { db } from "@/utils/dbConnection";
 import { currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 export default async function setup() {
   const user = await currentUser();
   const data = await db.query(`SELECT * FROM week09users WHERE uuid = $1`, [
     user.id,
   ]);
-  if (data.rows.length > 0) redirect(`/`);
+  if (data.rows.length > 0) redirect(`/users/profile`);
   async function handle(values) {
     "use server";
     const formdata = {
@@ -27,20 +31,37 @@ export default async function setup() {
       ]
     );
     revalidatePath(`/users/${newUser.rows[0].id}`);
-    redirect(`/users/${newUser.rows[0].id}`);
+    revalidatePath(`/users/profile`);
+    redirect(`/users/profile`);
   }
   return (
     <>
+      <h1>Profile setup</h1>
       <form action={handle}>
-        <label htmlFor="first_name">First name: </label>
-        <input type="text" name="first_name" required />
-        <label htmlFor="last_name">Last name: </label>
-        <input type="text" name="last_name" required />
-        <label htmlFor="username">Username: </label>
-        <input type="text" name="username" required />
-        <label htmlFor="bio">Bio: </label>
-        <textarea name="bio" />
-        <button type="submit">Submit</button>
+        <Label htmlFor="first_name">First name: </Label>
+        <Input
+          type="text"
+          name="first_name"
+          defaultValue={user.firstName}
+          required
+        />
+        <Label htmlFor="last_name">Last name: </Label>
+        <Input
+          type="text"
+          name="last_name"
+          defaultValue={user.lastName}
+          required
+        />
+        <Label htmlFor="username">Username: </Label>
+        <Input
+          type="text"
+          name="username"
+          defaultValue={user.username}
+          required
+        />
+        <Label htmlFor="bio">Bio: </Label>
+        <Textarea name="bio" required />
+        <Button type="submit">Submit</Button>
       </form>
     </>
   );
