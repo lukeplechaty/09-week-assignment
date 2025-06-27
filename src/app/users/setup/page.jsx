@@ -35,7 +35,7 @@ export default async function setup() {
     redirect(`/users/profile`);
   }
   return (
-    <>
+    <div className="max-w-md absolute left-[50%] w-full translate-x-[-50%]">
       <h1>Profile setup</h1>
       <form action={handle}>
         <Label htmlFor="first_name">First name: </Label>
@@ -63,6 +63,6 @@ export default async function setup() {
         <Textarea name="bio" required />
         <Button type="submit">Submit</Button>
       </form>
-    </>
+    </div>
   );
 }

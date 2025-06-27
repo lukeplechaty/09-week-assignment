@@ -13,14 +13,16 @@ export default async function profile() {
   if (!query.rows.length > 0) redirect(`/users/setup`);
   const user = query.rows[0];
   return (
-    <>
-      <h1>
+    <div className="flex flex-col items-center p-2">
+      <h1 className="text-4xl">
         {user.first_name} {user.last_name}
       </h1>
-      <p>{user.bio}</p>
-      <EditBio userid={user.id} />
-      <NewPost userid={user.id} />
+      <p className="text-2xl">{user.bio}</p>
+      <div className="flex gap-3 pb-3">
+        <EditBio userid={user.id} />
+        <NewPost userid={user.id} />
+      </div>
       <UserPosts userid={user.id} edit={true} />
-    </>
+    </div>
   );
 }

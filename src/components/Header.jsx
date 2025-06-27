@@ -7,11 +7,15 @@ export default function Header() {
   const pathname = usePathname();
   return (
     <header>
-      <nav className="flex justify-center gap-[10px]">
+      <nav className="flex justify-center gap-[20px]">
         {links.map((link) => (
           <Link
             key={link.id}
-            className={pathname === link.href ? "bg-orange-700" : ""}
+            className={
+              pathname === link.href
+                ? "bg-orange-300 text-blue-500 hover:text-blue-300"
+                : "text-blue-500 hover:text-blue-300"
+            }
             href={link.href}
           >
             {link.name}

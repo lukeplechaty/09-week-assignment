@@ -10,29 +10,36 @@ export default async function UserPosts(props) {
   );
   let posts = query.rows;
   return (
-    <>
-      <h1>posts</h1>
+    <div className="flex flex-col gap-2 border-solid border-2 border-gray-500 p-2">
+      <h1 className="text-3xl">posts</h1>
       {posts.map((post) => (
-        <div key={post.post_id}>
+        <div
+          key={post.post_id}
+          className="border-solid border-2 border-gray-500 p-2"
+        >
           <Link href={`/users/${post.user_id}`}>
-            <h1>{post.username}</h1>
+            <h1 className="text-2xl text-blue-500 hover:text-blue-300">
+              {post.username}
+            </h1>
           </Link>
           <p>{post.msg}</p>
-          <Newcomment
-            postid={post.post_id}
-            userid={post.user_id}
-            username={post.username}
-            msg={post.msg}
-            edit={true}
-          />
-          {props.edit ? (
-            <>
-              <EditPost postid={post.post_id} userid={props.userid} />
-              <DeletePost postid={post.post_id} userid={props.userid} />
-            </>
-          ) : null}
+          <div className="flex gap-2">
+            <Newcomment
+              postid={post.post_id}
+              userid={post.user_id}
+              username={post.username}
+              msg={post.msg}
+              edit={true}
+            />
+            {props.edit ? (
+              <>
+                <EditPost postid={post.post_id} userid={props.userid} />
+                <DeletePost postid={post.post_id} userid={props.userid} />
+              </>
+            ) : null}
+          </div>
         </div>
       ))}
-    </>
+    </div>
   );
 }

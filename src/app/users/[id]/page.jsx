@@ -11,12 +11,12 @@ export default async function user({ params }) {
   if (!query.rows.length > 0) notFound();
   const user = query.rows[0];
   return (
-    <>
-      <h1>
+    <div className="flex flex-col items-center gap-2 ">
+      <h1 className="text-4xl">
         {user.first_name} {user.last_name}
       </h1>
-      <p>{user.bio}</p>
+      <p className="text-2xl">{user.bio}</p>
       <UserPosts userid={id} />
-    </>
+    </div>
   );
 }
