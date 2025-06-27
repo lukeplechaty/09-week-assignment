@@ -20,7 +20,7 @@ export default async function profile() {
       <p>{user.bio}</p>
       <EditBio userid={user.id} />
       <NewPost userid={user.id} />
-      <UserPosts userid={user.id} />
+      <UserPosts userid={user.id} edit={true} />
     </>
   );
 }
