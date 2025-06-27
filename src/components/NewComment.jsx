@@ -41,19 +41,22 @@ export default async function Newcomment(props) {
           <Button variant="outline">Comment</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>{props.username} post</DialogTitle>
+          </DialogHeader>
+          <p>{props.msg}</p>
+          <div className="overflow-y-scroll max-h-70 flex flex-col gap-2">
+            {msgs.map((val) => (
+              <div
+                key={val.id}
+                className="border-solid border-2 border-gray-500 p-1"
+              >
+                <h2 className=" text-[22px]">{val.username}</h2>
+                <p>{val.msg}</p>
+              </div>
+            ))}
+          </div>
           <form action={handel}>
-            <DialogHeader>
-              <DialogTitle>{props.username} post</DialogTitle>
-            </DialogHeader>
-            <p>{props.msg}</p>
-            <div className="overflow-y-scroll max-h-70">
-              {msgs.map((val) => (
-                <div key={val.id}>
-                  <h2>{val.username}</h2>
-                  <p>{val.msg}</p>
-                </div>
-              ))}
-            </div>
             <DialogFooter>
               <Textarea name="msg" />
               <DialogClose asChild>

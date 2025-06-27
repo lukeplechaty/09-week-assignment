@@ -27,10 +27,13 @@ export default async function Comments(props) {
             <DialogTitle>{props.username} post</DialogTitle>
           </DialogHeader>
           <p>{props.msg}</p>
-          <div className="overflow-y-scroll max-h-70">
+          <div className="overflow-y-scroll max-h-70 flex flex-col gap-2">
             {msgs.map((val) => (
-              <div key={val.id}>
-                <h2>{val.username}</h2>
+              <div
+                key={val.id}
+                className="border-solid border-2 border-gray-500 p-1"
+              >
+                <h2 className=" text-[22px]">{val.username}</h2>
                 <p>{val.msg}</p>
               </div>
             ))}
