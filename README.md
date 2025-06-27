@@ -8,9 +8,9 @@
 
   - Set up user sign-up and user login using Clerk --done
   - Create and display an error/not found page if the user visits a page that doesn’t exist --done
-  - Use 1 or more Radix UI Primitive component, or something similar.
+  - Use 1 or more Radix UI Primitive component, or something similar --done
   - users to create a user profile --done
-  - Enable users to create posts associated with their Clerk userId. Posts should be displayed on the user’s profile page.
+  - Enable users to create posts associated with their Clerk userId. Posts should be displayed on the user’s profile page --done
 
 - stretch goals
   - Allow users to update their content.
