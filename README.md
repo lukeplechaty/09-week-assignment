@@ -15,7 +15,7 @@
 - stretch goals
   - Allow users to update their content.
   - Allow users to delete their content.
-  - Allow users to view other profiles directly from posts they see on the global timeline, using a dynamic users route.
+  - Allow users to view other profiles directly from posts they see on the global timeline, using a dynamic users route --done
   - Let users follow each other by establishing a follower and followee relationship between profiles.
   - Enable users to like posts by linking their user_id to the liked_post in a junction table.
   - Ensure that a user’s biography cannot be left blank --done

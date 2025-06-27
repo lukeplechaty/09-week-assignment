@@ -12,14 +12,18 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from "./ui/textarea";
 
-export default function NewPost(props) {
+export default async function EditBio(props) {
+  const query = await db.query(`SELECT bio FROM week09users WHERE id=$1`, [
+    props.userid,
+  ]);
+  const bio = query.rows[0].bio;
   async function handel(values) {
     "use server";
-    const msg = values.get(`msg`);
-    await db.query(
-      `INSERT INTO week09posts (msg, likes, user_id) VALUES ($1, $2, $3)`,
-      [msg, 0, props.userid]
-    );
+    const bio = values.get(`msg`);
+    await db.query(`UPDATE week09users SET bio=$1 WHERE id=$2)`, [
+      bio,
+      props.userid,
+    ]);
     revalidatePath(`/users/${props.userid}`);
     revalidatePath(`/users/profile`);
   }
@@ -27,14 +31,14 @@ export default function NewPost(props) {
     <Dialog>
       <form>
         <DialogTrigger asChild>
-          <Button variant="outline">New Post</Button>
+          <Button variant="outline">Edit Bio</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <form action={handel}>
             <DialogHeader>
               <DialogTitle>New post</DialogTitle>
             </DialogHeader>
-            <Textarea name="msg" />
+            <Textarea name="bio" defaultValue={bio} />
             <DialogFooter>
               <DialogClose asChild>
                 <Button variant="outline">Cancel</Button>
