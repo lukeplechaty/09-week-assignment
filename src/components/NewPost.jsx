@@ -16,10 +16,10 @@ export default function NewPost(props) {
   async function handel(values) {
     "use server";
     const msg = values.get(`msg`);
-    await db.query(
-      `INSERT INTO week09posts (msg, likes, user_id) VALUES ($1, $2, $3)`,
-      [msg, 0, props.userid]
-    );
+    await db.query(`INSERT INTO week09posts (msg, user_id) VALUES ($1, $2)`, [
+      msg,
+      props.userid,
+    ]);
     revalidatePath(`/users/${props.userid}`);
     revalidatePath(`/users/profile`);
   }

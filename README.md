@@ -26,3 +26,4 @@
 
 - i use okso.app to help make a layout and site flow
 - i use https://tailwindcss.504b.cc/ to help with styleing
+- i use https://ui.shadcn.com/ for the UI components
